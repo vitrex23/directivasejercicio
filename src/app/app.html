@@ -1,0 +1,33 @@
+<div class="contenedor">
+  <h1>ejercicio de directivas</h1>
+
+  <div class="estado-info" [ngClass]="estado">
+    estado de la aplicacion: <strong>{{ estado }}</strong>
+  </div>
+
+  <button 
+    (click)="manejarAccion()" 
+    [disabled]="estado === 'Cargando'">
+    {{ estado === 'Exito' ? 'Borrar' : 'Cargar' }}
+  </button>
+
+  <div class="area-resultados" [ngSwitch]="estado">
+
+    <div *ngSwitchCase="'Pendiente'" class="mensaje">
+      <p>aun no se han cargado los datos. pulsa el boton para iniciar.</p>
+    </div>
+
+    <div *ngSwitchCase="'Cargando'" class="mensaje">
+      <p>esperando respuesta del servidor (2 segundos)...</p>
+    </div>
+
+    <div *ngSwitchCase="'Exito'">
+      <ul class="lista">
+        <li *ngFor="let item of elementos">
+          {{ item }}
+        </li>
+      </ul>
+    </div>
+
+  </div>
+</div>
